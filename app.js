@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPlayer = 1;
   let player1ScoreBoard = document.querySelector('#player1ScoreBoard');
   let player2ScoreBoard = document.querySelector('#player2ScoreBoard');
-  console.log(player1ScoreBoard);
 
   player1ScoreBoard.innerHTML = localStorage.getItem('player1Score');
   player2ScoreBoard.innerHTML = localStorage.getItem('player2Score');
@@ -117,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         result.innerHTML = 'Player Two Wins!';
         setTimeout(() => {
           window.location.reload();
-        }, 800);
+        }, 100);
       }
     }
   }
