@@ -1,14 +1,16 @@
+// event fires when the HTML document has been loaded and parsed
 document.addEventListener('DOMContentLoaded', () => {
+  // Assigning elements from the DOM to variables
   const squares = document.querySelectorAll('.grid div');
   const result = document.querySelector('#result');
   const displayCurrentPlayer = document.querySelector('#current-player');
   let currentPlayer = 1;
   let player1ScoreBoard = document.querySelector('#player1ScoreBoard');
   let player2ScoreBoard = document.querySelector('#player2ScoreBoard');
-
+  // Displays to the user the score for each player that is stored in local storage
   player1ScoreBoard.innerHTML = localStorage.getItem('player1Score');
   player2ScoreBoard.innerHTML = localStorage.getItem('player2Score');
-
+  // Arrays that contain all of the winning combinations to the game
   const winningArrays = [
     [0, 1, 2, 3],
     [41, 40, 39, 38],
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [12, 19, 26, 33],
     [13, 20, 27, 34],
   ];
-
+  // Function checks the board for a winner
   function checkBoard() {
     for (let y = 0; y < winningArrays.length; y++) {
       const square1 = squares[winningArrays[y][0]];
@@ -94,15 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
         square3.classList.contains('player-one') &&
         square4.classList.contains('player-one')
       ) {
+        // Getting the player's score from local storage to keep track on a scoreboard
         let p1 = JSON.parse(localStorage.getItem('player1Score'));
         let count = p1;
         count++;
+        // Incrementing the score each time a player has won
         localStorage.setItem('player1Score', count);
+        // Alerts the player that they have won
         swal({
           title: 'Player 1 wins!',
           text: 'Congratulations!',
           icon: 'success',
         });
+        // After the game has finished the window will refresh automatically
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -117,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let count = p2;
         count++;
         localStorage.setItem('player2Score', count);
-        // result.innerHTML = 'Player Two Wins!';
+
         swal({
           title: 'Player 2 wins!',
           text: 'Congratulations!',
@@ -131,11 +137,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   for (let i = 0; i < squares.length; i++) {
+    // adding an onclick to every square in the grid
     squares[i].onclick = () => {
+      // if the square below has the 'taken' class, you can place a piece on top of it unless the square has already been chosen
       if (
         squares[i + 7].classList.contains('taken') &&
         !squares[i].classList.contains('taken')
       ) {
+        // Depending on the player, when the square is clicked, it will display the correct color as well as adding the 'taken' class so that a new piece can be placed on top of it
+        // The player's turn then switches and displays it to the user
         if (currentPlayer == 1) {
           squares[i].classList.add('taken');
           squares[i].classList.add('player-one');
@@ -147,12 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
           currentPlayer = 1;
           displayCurrentPlayer.innerHTML = currentPlayer;
         }
-      } else
+      }
+      // Handling the user error of not clicking on the correct place
+      else
         swal({
           title: "Can't go here!",
           text: 'Player must place their piece on the bottom row or on top of another piece',
           icon: 'error',
         });
+      // Function runs to see if there has been a winner
       checkBoard();
     };
   }
