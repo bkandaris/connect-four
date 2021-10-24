@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const result = document.querySelector('#result');
   const displayCurrentPlayer = document.querySelector('#current-player');
   let currentPlayer = 1;
-  localStorage.setItem('player1Score', 0);
-  localStorage.setItem('player2Score', 0);
+  let player1ScoreBoard = document.querySelector('#player1ScoreBoard');
+  let player2ScoreBoard = document.querySelector('#player2ScoreBoard');
+  console.log(player1ScoreBoard);
+
+  player1ScoreBoard.innerHTML = localStorage.getItem('player1Score');
+  player2ScoreBoard.innerHTML = localStorage.getItem('player2Score');
 
   const winningArrays = [
     [0, 1, 2, 3],
@@ -91,11 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
         square3.classList.contains('player-one') &&
         square4.classList.contains('player-one')
       ) {
+        let p1 = JSON.parse(localStorage.getItem('player1Score'));
+        let count = p1;
+        count++;
+        localStorage.setItem('player1Score', count);
         result.innerHTML = 'Player One Wins!';
-
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 10000);
       }
       if (
         square1.classList.contains('player-two') &&
@@ -103,10 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
         square3.classList.contains('player-two') &&
         square4.classList.contains('player-two')
       ) {
+        let p2 = JSON.parse(localStorage.getItem('player2Score'));
+        let count = p2;
+        count++;
+        localStorage.setItem('player2Score', count);
         result.innerHTML = 'Player Two Wins!';
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 800);
       }
     }
   }
@@ -131,13 +142,5 @@ document.addEventListener('DOMContentLoaded', () => {
       } else alert('cant go here');
       checkBoard();
     };
-  }
-
-  function keepCount() {
-    let p1 = localStorage.getItem('player1Score');
-    let p2 = localStorage.getItem('player2Score');
-
-    console.log('player 1 score local', p1);
-    console.log('player 2 score local', p1);
   }
 });
