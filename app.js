@@ -98,10 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let count = p1;
         count++;
         localStorage.setItem('player1Score', count);
-        result.innerHTML = 'Player One Wins!';
+        swal({
+          title: 'Player 1 wins!',
+          text: 'Congratulations!',
+          icon: 'success',
+        });
         setTimeout(() => {
           window.location.reload();
-        }, 10000);
+        }, 2000);
       }
       if (
         square1.classList.contains('player-two') &&
@@ -113,10 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let count = p2;
         count++;
         localStorage.setItem('player2Score', count);
-        result.innerHTML = 'Player Two Wins!';
+        // result.innerHTML = 'Player Two Wins!';
+        swal({
+          title: 'Player 2 wins!',
+          text: 'Congratulations!',
+          icon: 'success',
+        });
         setTimeout(() => {
           window.location.reload();
-        }, 100);
+        }, 2000);
       }
     }
   }
@@ -138,7 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
           currentPlayer = 1;
           displayCurrentPlayer.innerHTML = currentPlayer;
         }
-      } else alert('cant go here');
+      } else
+        swal({
+          title: "Can't go here!",
+          text: 'Player must place their piece on the bottom row or on top of another piece',
+          icon: 'error',
+        });
       checkBoard();
     };
   }

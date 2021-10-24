@@ -1,13 +1,10 @@
-body {
-  background-color: lightgrey;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.how {
-  font-weight: bold;
-}
-p {
-  letter-spacing: 0.05rem;
-  line-height: 1.2rem;
+body {
+  background-color: rgb(255, 247, 247);
 }
 
 .wrapper {
@@ -19,12 +16,56 @@ p {
   align-items: center;
 }
 
+.how {
+  font-weight: bold;
+}
+
+p {
+  letter-spacing: 0.05rem;
+  line-height: 1.2rem;
+}
+
+h1 {
+  margin: 30px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+h3 {
+  width: 400px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.playerScore {
+  margin: 10px 0;
+}
+
+.scoreboard {
+  border-radius: 10px;
+  border: 3px solid black;
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  margin: 20px;
+}
+
 .grid {
   border: 1px solid;
   height: 120px;
   width: 140px;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .grid div {
